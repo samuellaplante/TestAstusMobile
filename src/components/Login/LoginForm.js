@@ -38,7 +38,7 @@ export default class LoginForm extends Component {
                           title='Remember me'/>
 
               <TouchableOpacity style={styles.buttonContainer} onPress={this.onLogin}>
-                    <Text  style={styles.buttonText}>LOGIN</Text>
+                    <Text style={styles.buttonText}>LOGIN</Text>
                 </TouchableOpacity> 
             </View>
         );
