@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { View, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import LoginForm from './LoginForm';
 
-export default class Login extends Component {
+class Login extends Component {
     render(){
         return (
         <KeyboardAvoidingView  behavior="padding" style={styles.container}>
@@ -14,7 +14,7 @@ export default class Login extends Component {
                </View>
         </KeyboardAvoidingView>
         );
-    }    
+    }
 }
 
 const styles = StyleSheet.create({
@@ -40,3 +40,5 @@ const styles = StyleSheet.create({
         opacity: 0.9
     }
 });
+
+export default Login;

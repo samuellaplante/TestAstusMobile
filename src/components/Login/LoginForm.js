@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, Button, StyleSheet, StatusBar} from 'react-native';
 import { CheckBox } from 'react-native-elements'
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {rememberMe: true};
@@ -37,9 +37,9 @@ export default class LoginForm extends Component {
                           onPress={() => this.onRememberMeCheck()}
                           title='Remember me'/>
 
-              <TouchableOpacity style={styles.buttonContainer} onPress={this.onLogin}>
+              <TouchableOpacity style={styles.buttonContainer} onPress={() => this.onLogin()}>
                     <Text style={styles.buttonText}>LOGIN</Text>
-                </TouchableOpacity> 
+              </TouchableOpacity> 
             </View>
         );
     }
@@ -47,11 +47,12 @@ export default class LoginForm extends Component {
         this.setState({rememberMe: !this.state.rememberMe});
     }
     onLogin(){
-        console.log("Login");
+        console.log(this.props.navigation.navigate);
+        this.props.navigation.navigate('Realtime');
     }
 }
 
-// define your styles
+
 const styles = StyleSheet.create({
     container: {
      padding: 20
@@ -84,3 +85,5 @@ const styles = StyleSheet.create({
        color: '#fff'
     }
 });
+
+export default LoginForm;
