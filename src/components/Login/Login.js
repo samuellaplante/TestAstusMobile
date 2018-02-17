@@ -10,10 +10,14 @@ class Login extends Component {
                     <Image resizeMode="contain" style={styles.logo} source={require('../../assets/images/astus-logo.png')} />
                    </View>
                <View style={styles.formContainer}>
-                   <LoginForm />
+                   <LoginForm onLogin={() => this.onLogin()} />
                </View>
         </KeyboardAvoidingView>
         );
+    }
+    onLogin(){
+        console.log(this.props);
+        this.props.navigation.navigate('Realtime');
     }
 }
 

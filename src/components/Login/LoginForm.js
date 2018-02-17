@@ -47,8 +47,7 @@ class LoginForm extends Component {
         this.setState({rememberMe: !this.state.rememberMe});
     }
     onLogin(){
-        console.log(this.props.navigation.navigate);
-        this.props.navigation.navigate('Realtime');
+        this.props.onLogin();
     }
 }
 

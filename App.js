@@ -2,17 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Login from './src/components/Login/Login'
 import Realtime from './src/components/Realtime/Realtime'
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
+
+const DrawerStack = DrawerNavigator({
+  Realtime: { screen: Realtime }
+})
 
 const RootStack = StackNavigator({
   Login: {
-    screen: Login
+    screen: Login,
+
   },
-  Realtime: {
-    screen: Realtime
-  }},
-  {
-  InitialRouteName: 'Login'
+  MainApp: {
+    screen: DrawerStack
+  }
+}, {
+  headerMode: 'none'
 });
 
 export default class App extends React.Component {
