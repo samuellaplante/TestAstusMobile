@@ -1,43 +1,44 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react'
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Header, List, ListItem } from 'react-native-elements';
+import OpenDrawerNavigator from '../Shared/OpenDrawerNavigator'
+import Loading from '../Shared/Loading'
+import { inject, observer } from 'mobx-react';
 
-const list = [
-  {
-    title: 'Appointments',
-    icon: 'av-timer'
-  },
-  {
-    title: 'Trips',
-    icon: 'flight-takeoff'
+@inject('vehicleLastStateStore')
+@observer
+class Realtime extends Component {
+  componentDidMount() {
+    this.props.vehicleLastStateStore.getAll();
   }
-]
 
-class Realtime extends React.Component {
   render() {
+    let view = <Loading />
+    if (this.props.vehicleLastStateStore.store != undefined) {
+      view = <List>
+        {
+          this.props.vehicleLastStateStore.store.map((item, i) => (
+            <ListItem
+              key={i}
+              title={item.VehicleName}
+            />
+          ))
+        }
+      </List>;
+    }
+
     return (
-      <View>
+      <View style={{flex: 1}}>
         <Header outerContainer={styles.outerContainer}
-          leftComponent={{ icon: 'menu', color: '#fff', onPress: () => this.openDrawer() }}
+          leftComponent={<OpenDrawerNavigator navigation={this.props.navigation} />}
           centerComponent={{ text: 'Vehicles', style: { color: '#fff' } }}
           rightComponent={{ icon: 'search', color: '#fff' }}
         />
-        <List>
-          {
-            list.map((item, i) => (
-              <ListItem
-                key={i}
-                title={item.title}
-                leftIcon={{ name: item.icon }}
-              />
-            ))
-          }
-        </List>
+        <ScrollView style={{flex: 1}}>
+          {view}
+        </ScrollView>
       </View>
     );
-  }
-  openDrawer(){
-    this.props.navigation.navigate("DrawerOpen");
   }
 }
 

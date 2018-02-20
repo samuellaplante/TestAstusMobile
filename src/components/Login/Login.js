@@ -1,24 +1,37 @@
-import React, {Component} from 'react';
-import { View, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import React, { Component } from 'react';
+import { NavigationActions } from 'react-navigation';
+import { View, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { inject, observer } from 'mobx-react';
+
 import LoginForm from './LoginForm';
 
+@inject('authenticationStore')
+@observer
 class Login extends Component {
-    render(){
+    render() {
         return (
-        <KeyboardAvoidingView  behavior="padding" style={styles.container}>
-            <View style={styles.loginContainer}>
+            <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                <View style={styles.loginContainer}>
                     <Image resizeMode="contain" style={styles.logo} source={require('../../assets/images/astus-logo.png')} />
-                   </View>
-               <View style={styles.formContainer}>
-                   <LoginForm onLogin={() => this.onLogin()} />
-               </View>
-        </KeyboardAvoidingView>
+                </View>
+                <View style={styles.formContainer}>
+                    <LoginForm onLogin={() => this.onLogin()} />
+                </View>
+            </KeyboardAvoidingView>
         );
     }
-    onLogin(){
-        console.log(this.props);
-        this.props.navigation.navigate('Realtime');
+    onLogin() {
+        this.props.authenticationStore.login().then(() => {
+            const resetAction = NavigationActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({routeName: "MainApp"}),
+                ],
+            });
+            this.props.navigation.dispatch(resetAction);
+        });
     }
+
 }
 
 const styles = StyleSheet.create({
@@ -26,7 +39,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#EEE',
     },
-    loginContainer:{
+    loginContainer: {
         alignItems: 'center',
         flexGrow: 1,
         justifyContent: 'center'
@@ -36,7 +49,7 @@ const styles = StyleSheet.create({
         width: 300,
         height: 100
     },
-    title:{
+    title: {
         color: "#FFF",
         marginTop: 120,
         width: 180,

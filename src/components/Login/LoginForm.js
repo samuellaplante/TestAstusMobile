@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, Button, StyleSheet, StatusBar} from 'react-native';
 import { CheckBox } from 'react-native-elements'
+import { inject, observer } from 'mobx-react'
 
+@inject('authenticationStore')
+@observer
 class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {rememberMe: true};
     }
+
+    handleEmailChange = e => {
+        this.props.authenticationStore.setUsername(e);
+    }
+    handlePasswordChange = e => this.props.authenticationStore.setPassword(e);
+
     render() {
         return (
             <View style={styles.container}>
@@ -16,9 +25,9 @@ class LoginForm extends Component {
                             onSubmitEditing={() => this.passwordInput.focus()} 
                             autoCorrect={false} 
                             autoComplete={false}
-                            keyboardType='email-address' 
                             returnKeyType="next" 
                             placeholder='Email' 
+                            onChangeText={(e) => this.handleEmailChange(e)}
                             underlineColorAndroid='transparent'
                             placeholderTextColor='#666'/>
 
@@ -28,6 +37,7 @@ class LoginForm extends Component {
                            autoComplete={false}
                            underlineColorAndroid='transparent'
                            placeholderTextColor='#666' 
+                           onChangeText={(e) => this.handlePasswordChange(e)}
                            secureTextEntry/>
                
                 <CheckBox right
