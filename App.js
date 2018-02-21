@@ -6,6 +6,7 @@ import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Provider } from 'mobx-react';
 import authenticationStore  from './src/api/authenticationStore'
 import vehicleLastStateStore  from './src/api/vehicleLastStateStore'
+import Map from './src/components/Map/Map'
 
 const stores = {
   authenticationStore,
@@ -13,7 +14,8 @@ const stores = {
 };
 
 const DrawerStack = DrawerNavigator({
-  Realtime: { screen: Realtime }
+  Realtime: { screen: Realtime },
+  Map: {screen: Map}
 })
 
 const RootStack = StackNavigator({

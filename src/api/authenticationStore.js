@@ -21,7 +21,7 @@ class AuthenticationStore {
     }
 
     @action login() {
-        this.inProgress = true;
+        this.isBusy = true;
         this.errors = undefined;
         return api.Authentication.login(this.values.username, this.values.password)
             .then(({ context }) => this.currentContext = context )

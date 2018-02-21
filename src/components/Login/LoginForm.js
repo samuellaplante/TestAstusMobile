@@ -11,9 +11,8 @@ class LoginForm extends Component {
         this.state = {rememberMe: true};
     }
 
-    handleEmailChange = e => {
-        this.props.authenticationStore.setUsername(e);
-    }
+    handleEmailChange = e => this.props.authenticationStore.setUsername(e);
+
     handlePasswordChange = e => this.props.authenticationStore.setPassword(e);
 
     render() {
@@ -26,6 +25,7 @@ class LoginForm extends Component {
                             autoCorrect={false} 
                             autoComplete={false}
                             returnKeyType="next" 
+                            keyboardType="email-address"
                             placeholder='Email' 
                             onChangeText={(e) => this.handleEmailChange(e)}
                             underlineColorAndroid='transparent'

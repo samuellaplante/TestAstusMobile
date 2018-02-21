@@ -3,7 +3,7 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'https://devapi.astus.com/api/';
+const API_ROOT = 'https://ppapi.astus.com/api/';
 
 const responseBody = res => res.body;
 

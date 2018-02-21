@@ -26,6 +26,7 @@
     "mobx-react": "^4.4.2",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-native-collapsible": "^0.10.0",
     "react-native-elements": "^0.19.0",
     "react-navigation": "^1.0.3",
     "superagent": "^3.8.2",
