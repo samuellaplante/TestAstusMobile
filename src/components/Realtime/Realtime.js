@@ -21,9 +21,7 @@ class Realtime extends Component {
 
     if (this.props.vehicleLastStateStore.store != undefined) {
       view = this.props.vehicleLastStateStore.store.map((item, i) => (
-        <VehicleItem title={item.VehicleName}>
-          {this.renderContent(item)}
-        </VehicleItem>
+        <VehicleItem expanded={false} key={item.VehicleID} title={item.VehicleName} data={item} />
       ));
     }
 
@@ -57,53 +55,7 @@ class Realtime extends Component {
     );
   }
 
-  renderContent(rowData) {
-    return (
-      <View style={{
-        backgroundColor: '#31363D'
-      }}>
-        <Text style={{
-          paddingTop: 15,
-          paddingRight: 15,
-          paddingLeft: 15,
-          paddingBottom: 15,
-          color: '#fff',
-        }}>
-          {this.getDetail(rowData)}
-        </Text>
-        <View style={{ flex: 1, height: 50, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', backgroundColor: '#5c6672' }}>
-          <TouchableOpacity style={{ width: 50 }}>
-            <Icon name="add-location" color="white" />
-          </TouchableOpacity>
-          <TouchableOpacity style={{ width: 50 }}>
-            <Icon name="description" color="white" />
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-
-  getDetail(vehicleLastState) {
-    var value = "";
-    if (vehicleLastState.IsInTrip && vehicleLastState.PositionSpeed > 0) {
-      value = vehicleLastState.PositionSpeed + " km / h";
-      value += ", " + new Date(vehicleLastState.PositionDate).toString("yyyy-MM-dd HH:mm:ss");
-    } else {
-      if (vehicleLastState.Location != null && vehicleLastState.Location != "")
-        value = vehicleLastState.Location;
-      if (vehicleLastState.Territory != null && vehicleLastState.Territory != "") {
-        if (value != "") value += ", ";
-        value += vehicleLastState.Territory;
-      }
-    }
-
-    if (vehicleLastState.DriverName != null && vehicleLastState.DriverName != "") {
-      if (value != "") value += ", ";
-      value += vehicleLastState.DriverName;
-    }
-
-    return value;
-  }
+  
 }
 
 const styles = StyleSheet.create({
